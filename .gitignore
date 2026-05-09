@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environments / local tooling
+.env
+.venv/
+venv/
+env/
+ENV/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.cursor/
+.claude/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.out
+*.err
+*.tmp
+*.bak
+*.cache
+
+# Large raw arrays
+*.fits
+*.npy
+
+# Checkpoints/arrays — ignore by default, then whitelist published artifacts.
+*.pt
+*.pth
+*.ckpt
+*.npz
+
+# Local-only working artifacts
+outputs/autopilot/
+outputs/logs/
+
+# Local data caches — host as Zenodo dataset, see data_scripts/ for fetchers
+data/*.parquet
+!data/jsoc_harp_noaa.txt
+
+# ---- WHITELIST: published checkpoints ----
+# (1) No-physics CNN benchmark (Stage 1 base)
+!outputs/checkpoints/benchmark_classifier/
+!outputs/checkpoints/benchmark_classifier/**
+
+# (2) Strong-form PINN: final + 3-seed runs
+!outputs/checkpoints/strong_form/
+!outputs/checkpoints/strong_form/**
+
+# (3) Weak-form PINN (Flare-PINN): final + 3-seed runs
+!outputs/checkpoints/weak_form/
+!outputs/checkpoints/weak_form/**
+
+# Classical baselines (LR / XGBoost / SVM)
+!outputs/classical_baselines/
+!outputs/classical_baselines/**
+
+# Paper-lock pointer JSON
+!outputs/finalists/flare_pinn_paper_lock.json
+
+# Final paper bundle
+!final_results/
+!final_results/**

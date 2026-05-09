@@ -1,0 +1,23 @@
+# Data configuration for training set (70% of data)
+span:
+  start: "2011-01-01"
+  end: "2015-01-11"
+
+cadence_minutes: 60
+window_hours: 48
+window_stride_hours: 6
+targets_hours: [6, 12, 24]
+
+censoring:
+  cmd_deg_threshold: 70.0
+
+resize:
+  target_px: 128
+
+paths:
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  cache_dir: "data/cache"
+  logs_dir: "logs"
+

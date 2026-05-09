@@ -1,0 +1,130 @@
+# physics_grad_scale: 0.08 — selected checkpoint step 44_000
+seed: 1234
+device: mps
+model:
+  model_type: hybrid
+  hidden: 256
+  layers: 8
+  learn_eta: false
+  in_channels: 3
+  fourier:
+    max_log2_freq: 6
+    ramp_frac: 0.5
+  encoder:
+    type: gru
+    latent_channels: 32
+    global_dim: 64
+    n_transformer_layers: 3
+    n_heads: 4
+    dropout: 0.15
+    use_checkpoint: true
+classifier:
+  hidden: 128
+  dropout: 0.35
+  horizons:
+  - 6
+  - 12
+  - 24
+  loss_type: cb_focal
+  cb_beta: 0.999
+  focal_gamma: 1.5
+  focal_alpha: 0.75
+  use_attention: true
+  use_physics_features: false
+  use_rf_guidance: false
+  label_smoothing: 0.0
+  confidence_penalty: 0.0
+physics:
+  enable: true
+  resistive: true
+  boundary_terms: false
+  mps_fast_physics: true
+  physics_grad_scale: 0.08
+  gradient_clamp_value: 50.0
+  enforce_force_free: false
+  use_gradnorm: true
+  gradnorm_alpha: 1.0
+  gradnorm_update_freq: 10
+  use_lra: false
+  lra_alpha: 0.9
+  lra_update_freq: 5
+  use_causal_training: true
+  causal_decay: 1.0
+  lambda_phys_schedule:
+  - - 0.0
+    - 0.0
+  - - 0.8
+    - 0.0
+  - - 1.0
+    - 0.20
+eta:
+  min: 0.0001
+  max: 1.0
+  tv_weight: 0.001
+loss_weights:
+  cls: 1.0
+  data: 1.0
+  curl_consistency: 0.2
+collocation:
+  n_max: 4096
+  alpha_start: 0.5
+  alpha_end: 0.95
+  impw_clip_quantile: 0.995
+  use_adaptive_resampling: false
+  adaptive_resample_freq: 25
+  adaptive_keep_ratio: 0.3
+train:
+  steps: 46000
+  freeze_classifier: false
+  batch_size: 2
+  num_workers: 0
+  gradient_accumulation_steps: 8
+  lr: 2.0e-05
+  grad_clip: 1.0
+  amp: false
+  plateau_patience: 4
+  plateau_lr_factor: 0.5
+  log_every: 100
+  eval_every: 1000
+  checkpoint_every: 1000
+  checkpoint_dir: outputs/checkpoints/weak_form/final
+  keep_last_n_checkpoints: 7
+  auto_restart_every: 2000
+  fresh_lr_schedule: true
+  lr_total_steps: 20000
+  use_ema: true
+  ema_decay: 0.995
+  scheduler:
+    type: cosine
+    warmup_steps: 0
+    min_lr: 1.0e-05
+  sampler:
+    strategy: random
+    positive_multiplier: 2.0
+    smoothing: 1.0
+data:
+  use_real: true
+  use_consolidated: true
+  consolidated_dir: ~/flare_data/consolidated
+  windows_parquet: data/windows_train_val_8005.parquet
+  target_size: 128
+  input_hours: 48
+  P_per_t: 512
+  pil_top_pct: 0.12
+  val_fraction: 0.0588
+  components:
+  - Bx
+  - By
+  - Bz
+  scalar_features:
+  - r_value
+  - gwpil
+  - obs_coverage
+  - frame_count
+  use_pil_evolution: true
+  use_temporal_statistics: true
+  use_normalized_features: true
+wandb:
+  enabled: true
+  project: flare-pinn-final
+  name: flare_pinn_final_physgrad008_seed1234

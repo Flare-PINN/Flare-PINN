@@ -1,0 +1,10 @@
+Comparison,Horizon,TSS_A,TSS_B,Delta_TSS,CI_Lower,CI_Upper,Width,P_Value,Test_Type,Significant
+Flare-PINN vs Ablation,6h,0.825921,0.712339,+0.113582,+0.030009,+0.209815,0.179806,0.010890,one-sided,True
+Strong-Form vs Ablation,6h,0.767370,0.712339,+0.055031,-0.002454,+0.127068,0.129523,0.133630,one-sided,False
+Flare-PINN vs Strong-Form,6h,0.825921,0.767370,+0.058551,+0.000706,+0.130816,0.130110,0.035140,one-sided,True
+Flare-PINN vs Ablation,12h,0.832779,0.680917,+0.151862,+0.072106,+0.237652,0.165546,0.000250,one-sided,True
+Strong-Form vs Ablation,12h,0.728442,0.680917,+0.047525,+0.009583,+0.098273,0.088691,0.049130,one-sided,True
+Flare-PINN vs Strong-Form,12h,0.832779,0.728442,+0.104338,+0.035422,+0.180665,0.145243,0.003140,one-sided,True
+Flare-PINN vs Ablation,24h,0.798033,0.745610,+0.052423,+0.011583,+0.097952,0.086369,0.014120,one-sided,True
+Strong-Form vs Ablation,24h,0.764954,0.745610,+0.019345,+0.006879,+0.040647,0.033768,0.000000,one-sided,True
+Flare-PINN vs Strong-Form,24h,0.798033,0.764954,+0.033078,-0.002777,+0.075391,0.078168,0.072360,one-sided,False

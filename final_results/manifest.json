@@ -1,0 +1,17 @@
+{
+  "reporting_policy": {
+    "headline_tables": "locked single-seed checkpoints",
+    "weak_headline_seed": "1234",
+    "weak_best_seed_among_available": "1234",
+    "bootstrap": "single-seed paper-lock predictions",
+    "robustness_table": "multi-seed weak summary; strong/no-physics pending if unavailable"
+  },
+  "generated_tables": {
+    "table1_sota": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/tables/table1_sota.csv",
+    "table2_efficiency": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/tables/table2_efficiency.csv",
+    "table3_main_results": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/tables/table3_main_results.csv",
+    "table4_bootstrap": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/tables/table4_bootstrap.csv",
+    "table5_training_robustness": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/tables/table5_training_robustness.csv",
+    "calibration_metrics": "/Users/akshgarg/Downloads/Physics Informed Neural Network/flare-pinn/final_results/metrics/calibration_metrics.csv"
+  }
+}

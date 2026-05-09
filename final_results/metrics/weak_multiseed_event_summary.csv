@@ -1,0 +1,4 @@
+Horizon,detection_rate_mean,detection_rate_std,median_lead_time_hours_mean,median_lead_time_hours_std,mean_lead_time_hours_mean,mean_lead_time_hours_std,alerts_per_day_mean,alerts_per_day_std,false_alert_rate_mean,false_alert_rate_std
+12h,1.000000,0.000000,12.000000,0.000000,11.866667,0.230940,0.385855,0.040119,0.343734,0.040119
+24h,1.000000,0.000000,24.000000,0.000000,22.727273,0.314918,0.451378,0.020598,0.407696,0.020598
+6h,0.893333,0.023094,6.000000,0.000000,5.909091,0.157459,0.321893,0.018612,0.286531,0.017742

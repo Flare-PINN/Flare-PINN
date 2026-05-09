@@ -1,0 +1,14 @@
+npz=outputs/checkpoints/seed1234_pinn_40k_to_46k_physgrad008_eval1k/validation_results/checkpoint_step_0044000_test.npz
+horizon_h=24 idx=2 threshold=0.2370
+n_windows=5716
+TP=86 FN=5 FP=827 TN=4798
+FAR_fp_over_tp_fp=0.9058
+FP prob mean=0.3530 median=0.3321 p90=0.4994
+FP obs_coverage mean=0.9630
+FP frac is_masked_24h=0.9395
+FN obs_coverage mean=0.9714
+FP: n=827 mean|CMD|=40.62 frac|CMD|>60.0=0.2926
+FN: n=5 mean|CMD|=46.37 frac|CMD|>60.0=0.2000
+TP: n=86 mean|CMD|=43.93 frac|CMD|>60.0=0.2907
+TN: n=4798 mean|CMD|=34.47 frac|CMD|>60.0=0.1392
+FP frac with C-class (no M+) in horizon=0.0000

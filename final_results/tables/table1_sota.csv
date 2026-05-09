@@ -1,0 +1,5 @@
+Method,Input,Evaluation,TSS_24h,TSS_24h_display
+"Flare-PINN (Weak-form, paper-lock)",Vec. mag.,Chronological holdout,0.798033,0.798
+Strong-Form PINN (paper-lock),Vec. mag.,Chronological holdout,0.764954,0.765
+"Benchmark (No Physics, paper-lock)",Vec. mag.,Chronological holdout,0.745610,0.746
+DeFN (5 seeds),Scalars,Chronological holdout,0.746216,0.746±0.058

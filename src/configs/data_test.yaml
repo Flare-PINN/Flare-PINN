@@ -1,0 +1,24 @@
+# Data configuration for test set (15% of data, held-out, independent)
+span:
+  start: "2015-12-18"
+  end: "2017-12-31"
+
+cadence_minutes: 60
+window_hours: 48
+window_stride_hours: 6
+targets_hours: [6, 12, 24]
+
+censoring:
+  cmd_deg_threshold: 70.0
+
+resize:
+  target_px: 128
+
+paths:
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  cache_dir: "data/cache"
+  logs_dir: "logs"
+
+

@@ -1,0 +1,10 @@
+Model,Horizon,TSS_mean,TSS_std,TSS_display
+Weak-form (n=3 seeds),6h,0.816984,0.011094,0.817±0.011
+Weak-form (n=3 seeds),12h,0.810600,0.020651,0.811±0.021
+Weak-form (n=3 seeds),24h,0.789759,0.007279,0.790±0.007
+Strong-form (n=3 seeds),6h,0.766959,0.002055,0.767±0.002
+Strong-form (n=3 seeds),12h,0.721118,0.009784,0.721±0.010
+Strong-form (n=3 seeds),24h,0.751902,0.011332,0.752±0.011
+No-Physics (n=3 seeds),6h,,,OPTIONAL / PENDING
+No-Physics (n=3 seeds),12h,,,OPTIONAL / PENDING
+No-Physics (n=3 seeds),24h,,,OPTIONAL / PENDING

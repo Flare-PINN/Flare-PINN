@@ -1,0 +1,119 @@
+seed: 1234
+device: mps
+model:
+  model_type: hybrid
+  hidden: 256
+  layers: 8
+  learn_eta: false
+  eta_scalar: 0.01
+  in_channels: 3
+  fourier:
+    max_log2_freq: 6
+    ramp_frac: 0.5
+  encoder:
+    type: gru
+    latent_channels: 32
+    global_dim: 64
+    n_transformer_layers: 3
+    n_heads: 4
+    dropout: 0.15
+    use_checkpoint: true
+classifier:
+  hidden: 128
+  dropout: 0.35
+  horizons:
+  - 6
+  - 12
+  - 24
+  loss_type: cb_focal
+  cb_beta: 0.999
+  focal_gamma: 1.5
+  focal_alpha: 0.75
+  use_attention: true
+  use_physics_features: false
+  label_smoothing: 0.0
+physics:
+  enable: true
+  resistive: true
+  use_strong_form: true
+  strong_form_use_huber: false
+  strong_form_huber_delta: 1.0
+  strong_form_edge_margin: 0
+  strong_form_chunk_size: 10000
+  physics_grad_scale: 0.16578947437218
+  use_gradnorm: true
+  gradnorm_alpha: 1.0
+  gradnorm_update_freq: 10
+  use_causal_training: true
+  causal_decay: 1.0
+  lambda_phys_schedule:
+  - - 0.0
+    - 0.0
+  - - 0.667
+    - 0.0
+  - - 1.0
+    - 0.2
+eta:
+  min: 0.0001
+  max: 1.0
+  tv_weight: 0.001
+loss_weights:
+  cls: 1.0
+  data: 1.0
+  curl_consistency: 0.2
+collocation:
+  n_max: 4096
+  alpha_start: 0.5
+  alpha_end: 0.95
+  impw_clip_quantile: 0.995
+train:
+  steps: 60000
+  batch_size: 2
+  num_workers: 0
+  gradient_accumulation_steps: 8
+  lr: 1.0e-05
+  grad_clip: 1.0
+  amp: false
+  log_every: 50
+  eval_every: 2000
+  checkpoint_every: 2000
+  checkpoint_dir: outputs/checkpoints/seed1234_pinn_strong_form
+  auto_restart_every: 2000
+  fresh_lr_schedule: false
+  lr_total_steps: 20000
+  use_ema: true
+  ema_decay: 0.995
+  scheduler:
+    type: cosine
+    warmup_steps: 0
+    min_lr: 1.0e-06
+  sampler:
+    strategy: random
+    positive_multiplier: 2.0
+    smoothing: 1.0
+data:
+  use_real: true
+  use_consolidated: true
+  consolidated_dir: ~/flare_data/consolidated
+  windows_parquet: data/windows_train_val_8005.parquet
+  target_size: 128
+  input_hours: 48
+  P_per_t: 512
+  pil_top_pct: 0.12
+  val_fraction: 0.0588
+  components:
+  - Bx
+  - By
+  - Bz
+  scalar_features:
+  - r_value
+  - gwpil
+  - obs_coverage
+  - frame_count
+  use_pil_evolution: true
+  use_temporal_statistics: true
+  use_normalized_features: true
+wandb:
+  enabled: true
+  project: flare-pinn-final
+  name: pinn_strong_form_seed1234

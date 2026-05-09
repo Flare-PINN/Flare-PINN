@@ -1,0 +1,22 @@
+================================================================================
+TEST SET PHYSICS RESIDUAL COMPARISON
+================================================================================
+
+PINN Model (Physics-Trained):
+----------------------------------------
+residual_mean       : median=0.000001, mean=0.000001, std=0.000000
+residual_median     : median=0.000001, mean=0.000001, std=0.000000
+residual_std        : median=0.000000, mean=0.000000, std=0.000000
+residual_max        : median=0.000001, mean=0.000001, std=0.000000
+
+Baseline Model (No Physics):
+----------------------------------------
+residual_mean       : median=0.000002, mean=0.000002, std=0.000000
+residual_median     : median=0.000002, mean=0.000002, std=0.000000
+residual_std        : median=0.000000, mean=0.000000, std=0.000000
+residual_max        : median=0.000002, mean=0.000002, std=0.000000
+
+Relative Improvement:
+----------------------------------------
+residual_mean       : 75.4% reduction
+residual_median     : 75.4% reduction

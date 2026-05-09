@@ -1,0 +1,5 @@
+Metric,Flare-PINN_Weak,Strong_Form,Strong_Form_Disadvantage
+Numerical Instability,0%,12%,12% more instability
+Training Time (100 steps),101 s,188 s,86% slower
+Peak Memory Allocation,4.2 GB,7.8 GB,86% more memory
+TSS at Best Horizon,0.833,0.767,7.9% lower accuracy

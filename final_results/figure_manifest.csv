@@ -1,0 +1,9 @@
+Figure,Status,Path
+Fig1 schematic,RESTORED_STATIC,final_results/figures/methodology_schematic_final.png
+Fig2 noise amplification,RESTORED_STATIC,final_results/figures/noise_amplification_spatial_nature_main.png
+Fig3 REV,REGENERATED,final_results/figures/rev_curve.png
+Fig4 calibration,REGENERATED,final_results/figures/calibration_combined.png
+Fig5 confusion,REGENERATED,final_results/figures/confusion_matrices_combined.png
+Fig6 physics diagnostics,REGENERATED,final_results/figures/physics_comparison_combined.png
+ROC/PR comparison,REGENERATED,final_results/figures/roc_pr_tss_comparison.png
+Residual comparison,RESTORED_STATIC,final_results/physics_residuals_full/residual_comparison.png

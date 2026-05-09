@@ -1,0 +1,24 @@
+{
+  "features": [
+    "feat_00",
+    "feat_01",
+    "feat_02",
+    "feat_03",
+    "feat_04",
+    "feat_05",
+    "feat_06",
+    "feat_07",
+    "feat_08",
+    "feat_09",
+    "feat_10",
+    "feat_11",
+    "feat_12",
+    "feat_13",
+    "feat_14",
+    "feat_15"
+  ],
+  "n_features": 16,
+  "train_size": 30482,
+  "val_size": 1904,
+  "test_size": 5716
+}

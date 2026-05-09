@@ -1,0 +1,24 @@
+{
+  "config": "src/configs/flare_pinn_final.yaml",
+  "selected_step": 44000,
+  "checkpoint_relative": "outputs/checkpoints/weak_form/final/checkpoint_step_0044000.pt",
+  "test_parquet": "data/windows_test_15.parquet",
+  "test_eval_artifact": "outputs/checkpoints/weak_form/final/validation_results/checkpoint_step_0044000_test.npz",
+  "selection_rule": {
+    "description": "Choose the late-stage physics checkpoint that maximizes mean validation TSS; test is reported once and is not used for selection.",
+    "physics_required": true,
+    "lambda_phys": "Training must follow `lambda_phys_schedule` in the locked YAML (physics loss inactive then ramped; final segment uses λ_phys = 0.20 at normalized time 1.0). Selection is only among runs that use this schedule.",
+    "candidate_steps": {
+      "min_step": 44000,
+      "max_step": 46000,
+      "rationale": "Late window only: last part of Stage 2 after physics is fully on, matching eval_every=1000 checkpoints in that range."
+    },
+    "metric_on_validation": {
+      "name": "mean_tss",
+      "definition": "Arithmetic mean of validation TSS at horizons 6h, 12h, and 24h at that step.",
+      "thresholds": "Distance-to-corner (D2C) operating points computed on the validation split only, as in training evaluation."
+    },
+    "tie_break": "If two steps tie on mean validation TSS within floating tolerance, break on higher 24h validation TSS; if those tie, prefer the earlier step in the window.",
+    "test_set": "Held-out test metrics are computed once for the selected step; thresholds stay frozen from validation."
+  }
+}

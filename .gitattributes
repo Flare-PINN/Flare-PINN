@@ -1,0 +1,2 @@
+# Shell entrypoints: consistent LF on all platforms (avoids bash ^M issues on Windows clones)
+tools/**/*.sh text eol=lf

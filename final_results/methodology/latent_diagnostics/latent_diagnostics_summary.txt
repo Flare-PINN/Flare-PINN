@@ -1,0 +1,26 @@
+n_flaring=7, n_quiet=190, n_total=197
+
+## Spatial autocorrelation of |u| (lag-1)
+  All HARPs:    mean=0.983  std=0.008  median=0.984  n=197
+  Flaring:      mean=0.984  std=0.006  median=0.984  n=7
+  Quiet:        mean=0.983  std=0.008  median=0.984  n=190
+  Effect size flaring vs quiet:  Cohen's d = 0.140  Mann-Whitney p = 8.094e-01  Welch's t p = 6.560e-01
+
+## Pearson r between |u| and |B_z|
+  All HARPs:    mean=0.566  std=0.342  median=0.649  n=197
+  Flaring:      mean=0.778  std=0.171  median=0.833  n=7
+  Quiet:        mean=0.558  std=0.344  median=0.649  n=190
+  Effect size flaring vs quiet:  Cohen's d = 0.646  Mann-Whitney p = 4.517e-02  Welch's t p = 1.889e-02
+
+## Mean |curl(u)| at PIL
+  All HARPs:    mean=0.001  std=0.000  median=0.001  n=197
+  Flaring:      mean=0.002  std=0.000  median=0.002  n=7
+  Quiet:        mean=0.001  std=0.000  median=0.001  n=190
+  Effect size flaring vs quiet:  Cohen's d = 2.182  Mann-Whitney p = 1.581e-06  Welch's t p = 1.858e-03
+
+## Mean |curl(u)| off-PIL
+  All HARPs:    mean=0.000  std=0.000  median=0.000  n=197
+  Flaring:      mean=0.001  std=0.000  median=0.001  n=7
+  Quiet:        mean=0.000  std=0.000  median=0.000  n=190
+  Effect size flaring vs quiet:  Cohen's d = 1.956  Mann-Whitney p = 1.313e-05  Welch's t p = 1.184e-03
+

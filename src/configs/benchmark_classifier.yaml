@@ -1,0 +1,166 @@
+# =============================================================================
+# BENCHMARK CONFIG - PURE CNN CLASSIFIER (NO PHYSICS) - 80/5/15 SPLIT
+# =============================================================================
+# Purpose: CNN baseline with 80/5/15 split optimized for M-class flare evaluation.
+# Train: 80% (30,481 windows, 1,186 M-class), Val: 5% (1,905 windows, 98 M-class)
+# Test: 15% (5,716 windows, 91 M-class) - maximizes test statistical power.
+# =============================================================================
+
+seed: 24
+device: mps
+
+# =============================================================================
+# MODEL
+# =============================================================================
+model:
+  model_type: hybrid
+  hidden: 256
+  layers: 8
+  learn_eta: false
+  in_channels: 3
+  
+  fourier:
+    max_log2_freq: 6    #  UPGRADE: Higher frequency for sharper PIL details
+    ramp_frac: 0.5
+  
+  encoder:
+    type: gru
+    latent_channels: 32
+    global_dim: 64
+    n_transformer_layers: 3
+    n_heads: 4
+    dropout: 0.15
+    use_checkpoint: true
+
+# =============================================================================
+# CLASSIFIER
+# =============================================================================
+classifier:
+  hidden: 128
+  dropout: 0.35
+  horizons: [6, 12, 24]
+  
+  loss_type: cb_focal
+  cb_beta: 0.999
+  focal_gamma: 1.5
+  focal_alpha: 0.75         
+  
+  use_attention: true
+  
+  #  PURE DATA BASELINE: Let model learn its own features
+  use_physics_features: false  # Disable physics features
+  use_rf_guidance: false       # Disable forced weights
+  
+  label_smoothing: 0.0
+  confidence_penalty: 0.0   
+
+# =============================================================================
+# PHYSICS (DISABLED)
+# =============================================================================
+physics:
+  enable: false             #  OFF
+  resistive: false
+  boundary_terms: false
+  mps_fast_physics: false   
+  # Even though physics is disabled, Pydantic validator requires a non-empty schedule
+  # and grad_scale >= 0.001. We set lambda=0.0 effectively disabling it anyway.
+  physics_grad_scale: 0.001
+  gradient_clamp_value: 50.0 
+  enforce_force_free: false  
+  
+  use_gradnorm: false       #  OFF
+  gradnorm_alpha: 0.0
+  gradnorm_update_freq: 10
+  
+  use_lra: false
+  
+  use_causal_training: true
+  causal_decay: 1.0        
+  
+  lambda_phys_schedule:
+    - [0.0, 0.0]
+    - [1.0, 0.0]
+
+eta:
+  min: 1.0e-4
+  max: 1.0
+  tv_weight: 1.0e-3
+
+# =============================================================================
+# LOSS WEIGHTS
+# =============================================================================
+loss_weights:
+  cls: 1.0
+  data: 1.0                 # We still learn to reconstruct B (auxiliary task)
+  curl_consistency: 0.0
+
+# =============================================================================
+# COLLOCATION
+# =============================================================================
+collocation:
+  n_max: 1024               # Reduced - not used for physics, just data loss
+  alpha_start: 0.5
+  alpha_end: 0.85
+  impw_clip_quantile: 0.995
+  
+  use_adaptive_resampling: false
+
+# =============================================================================
+# TRAINING
+# =============================================================================
+train:
+  steps: 40000              # Target: 40k steps to match baseline
+  batch_size: 2
+  num_workers: 2  
+  gradient_accumulation_steps: 8 
+  
+  lr: 2.0e-4                # Bumped from 1e-4 for faster convergence
+  grad_clip: 1.0            
+  amp: false
+  
+  plateau_patience: 6       
+  plateau_lr_factor: 0.5    
+  
+  log_every: 100
+  eval_every: 2000
+  checkpoint_every: 2000
+  
+  checkpoint_dir: "outputs/checkpoints/benchmark_classifier_pil015"  
+  
+  auto_restart_every: 2000  
+  fresh_lr_schedule: false   # Start from scratch
+  
+  use_ema: true
+  ema_decay: 0.995          
+  
+  scheduler:
+    type: cosine
+    warmup_steps: 1000
+    min_lr: 1.0e-6
+  
+  sampler:
+    strategy: random            
+    positive_multiplier: 2.0  # Matches your new setting
+    smoothing: 1.0              
+
+# =============================================================================
+# DATA
+# =============================================================================
+data:
+  use_real: true
+  use_consolidated: true
+  consolidated_dir: ~/flare_data/consolidated
+  windows_parquet: data/windows_train_val_8005.parquet
+  
+  target_size: 128
+  input_hours: 48
+  P_per_t: 512
+  pil_top_pct: 0.12     
+  val_fraction: 0.0588  # 5% validation from 85% train+val (80/5/15 split)
+  
+  components: ["Bx", "By", "Bz"]
+  
+  scalar_features: ["r_value", "gwpil", "obs_coverage", "frame_count"]
+  use_pil_evolution: true
+  use_temporal_statistics: true
+
